@@ -2,9 +2,20 @@
 <% @items.each do |item| %>
 	<%= item.content %> <br>
 	<%= item.user.email %> <br>
+	<% if item.is_completed %>
+		<%= link_to "Geri Al", complete_item_path(item) , method: :patch%> <br>
+	<% else %>
+		<%= link_to "Tamamla", complete_item_path(item) , method: :patch%> <br>
+	<% end %>
 ----------------------------------------------	 <br>
 <% end %>
 
-<%= render 'form' %>
+<%= render 'form' %> <br>
 
-<%= current_user.email %>
+<% if user_signed_in? %>
+	<%= current_user.email %> <br>
+	<%= link_to "Çıkış Yap", destroy_user_session_path(current_user), method: :delete %>
+<% else %>
+	<%= link_to "Giriş Yap", new_user_session_path %> <br>
+	<%= link_to "Üye Ol",  new_user_registration_path %>
+<% end %>
