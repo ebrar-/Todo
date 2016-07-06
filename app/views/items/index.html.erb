@@ -1,0 +1,10 @@
+<h1>Yapılacaklar</h1>
+<% @items.each do |item| %>
+	<%= item.content %> <br>
+	<%= item.user.email %> <br>
+----------------------------------------------	 <br>
+<% end %>
+
+<%= render 'form' %>
+
+<%= current_user.email %>
