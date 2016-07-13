@@ -3,19 +3,27 @@ class ItemsController < ApplicationController
   before_action :authentice? , only: [:complete , :create]
   def index
   	@items = Item.all
-  	@item = Item.new
+  	#@item = Item.new
   end
 
   def create
     	@item = Item.new(item_params)
-    	@item.save
-    	@item.user_id = current_user
-    	redirect_to items_path
+    	if @item.save
+    	 @item.user_id = current_user
+    	 redirect_to items_path
+      else
+        redirect_to :back
+      end
   end
 
   def complete
   	@item.update_attributes(is_completed: @item.is_completed ^= true ) 
   	redirect_to items_path
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to :back
   end
 
   private
@@ -25,7 +33,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-  	params.require(:item).permit(:content)
+  	params.require(:item).permit(:content , :user_id)
   end
 
   def authentice?

@@ -3,7 +3,8 @@
 	<%= item.content %> <br>
 	<%= item.user.email %> <br>
 	<% if item.is_completed %>
-		<%= link_to "Geri Al", complete_item_path(item) , method: :patch%> <br>
+		<%= link_to "Geri Al", complete_item_path(item) , method: :patch%> 
+		<%= link_to "Sil", item_path(item) , method: :delete %> <br>
 	<% else %>
 		<%= link_to "Tamamla", complete_item_path(item) , method: :patch%> <br>
 	<% end %>

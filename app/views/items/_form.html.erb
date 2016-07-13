@@ -1,4 +1,7 @@
-<%= form_for @item do |f| %>
+<%= form_for :item  do |f| %>
 	<%= f.text_field :content , placeholder: "Yeni Göre" %>
+	<% if user_signed_in? %>
+		<%= f.hidden_field :user_id , value: current_user.id %>
+	<% end %>
 	<%= f.submit %>
 <% end %>
